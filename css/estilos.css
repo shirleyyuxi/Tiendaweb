@@ -1,0 +1,121 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONDO ESPACIO */
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background: black;
+    overflow-x: hidden;
+}
+
+/* ESTRELLAS ANIMADAS */
+body::after {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background: url('../img/stars.png');
+    animation: mover 60s linear infinite;
+    z-index: -1;
+}
+
+@keyframes mover {
+    from { transform: translate(0,0); }
+    to { transform: translate(-500px,-500px); }
+}
+
+/* HEADER */
+header {
+    background: rgba(0,0,0,0.8);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: #00d4ff;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #00d4ff;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.hero h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+/* TITULO */
+.titulo {
+    text-align: center;
+    margin: 30px;
+}
+
+/* PRODUCTOS GRID */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* TARJETAS */
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* IMAGEN */
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* BOTÓN */
+button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #00d4ff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0099cc;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0,0,0,0.8);
+    margin-top: 30px;
+}
