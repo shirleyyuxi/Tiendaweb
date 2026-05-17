@@ -57,17 +57,22 @@ body {
 
 /* Header */
 header {
-    background: rgba(0,0,0,0.7);
-    padding: 20px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    background: rgba(0,0,0,0.85);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00d4ff;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #00d4ff;
 }
 
 nav a {
-    margin: 0 15px;
+    margin-left: 20px;
     color: #00d4ff;
     text-decoration: none;
     font-weight: bold;
@@ -75,7 +80,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #00ffea;
+    color: white;
 }
 
 /* Título */
@@ -173,9 +178,19 @@ button:disabled {
 footer {
     background: rgba(0,0,0,0.8);
     text-align: center;
-    padding: 15px;
+    padding: 25px;
     margin-top: auto;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 2px solid #00d4ff;
+}
+
+footer a {
+    color: #00d4ff;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+footer a:hover {
+    color: white;
 }
 </style>
 
@@ -187,7 +202,8 @@ footer {
 <div id="overlay"></div>
 
 <header>
-    <h1>🛒 Productos disponibles</h1>
+    <div class="logo">🌌 Interstellar Shop</div>
+
     <nav>
         <a href="index.php">Inicio</a>
         <a href="productos.php">Productos</a>
@@ -195,15 +211,12 @@ footer {
         <a href="carrito.php">Carrito</a>
 
         <?php if(isset($_SESSION["cliente"])) { ?>
+            <a href="mis_pedidos.php">Mis pedidos</a>
             <a href="logout.php">Cerrar sesión</a>
         <?php } else { ?>
-            <a href="login.php">Login</a>
-            <a href="registro.php">Registro</a>
+            <a href="login.php">Iniciar sesión</a>
+            <a href="registro.php">Registrarse</a>
         <?php } ?>
-
-        <a href="sobre_nosotros.php">Sobre nosotros</a>
-        <a href="contacto.php">Contacto</a>
-        <a href="politica_seguridad.php">Política de seguridad</a>
     </nav>
 </header>
 
@@ -211,18 +224,7 @@ footer {
 
 <div class="productos">
 
-<?php while($row = $resultado->fetch_assoc()) { 
-
-    $precio_normal = $row['precio_normal'];
-    $precio_oferta = $row['precio_oferta'];
-    $stock = $row['existencias'];
-
-    if ($precio_oferta !== null && $precio_oferta > 0) {
-        $precio_mostrar = $precio_oferta;
-    } else {
-        $precio_mostrar = $precio_normal;
-    }
-?>
+<?php while($row = $resultado->fetch_assoc()) { ?>
 
     <div class="card">
 
@@ -233,25 +235,25 @@ footer {
         <h3><?php echo $row['nombre']; ?></h3>
 
         <p class="precio">
-            <?php if ($precio_oferta !== null && $precio_oferta > 0) { ?>
-                <span class="normal"><?php echo $precio_normal; ?> €</span>
-                <span class="oferta"><?php echo $precio_oferta; ?> €</span>
+            <?php if ($row['precio_oferta']) { ?>
+                <span class="normal"><?php echo $row['precio_normal']; ?> €</span>
+                <span class="oferta"><?php echo $row['precio_oferta']; ?> €</span>
             <?php } else { ?>
-                <span class="oferta"><?php echo $precio_normal; ?> €</span>
+                <span class="oferta"><?php echo $row['precio_normal']; ?> €</span>
             <?php } ?>
         </p>
 
         <!-- ESTADO DE DISPONIBILIDAD -->
-        <?php if ($stock > 5) { ?>
+        <?php if ($row['existencias'] > 5) { ?>
             <p class="estado disponible">🟢 Disponible</p>
-        <?php } elseif ($stock > 0) { ?>
+        <?php } elseif ($row['existencias'] > 0) { ?>
             <p class="estado ultimas">⚠️ Últimas unidades</p>
         <?php } else { ?>
             <p class="estado agotado">🔴 Agotado</p>
         <?php } ?>
 
         <!-- BOTÓN -->
-        <?php if ($stock > 0) { ?>
+        <?php if ($row['existencias'] > 0) { ?>
             <a href="pedido.php?id=<?php echo $row['id_producto']; ?>">
                 <button>Agregar al carrito</button>
             </a>
@@ -266,7 +268,18 @@ footer {
 </div>
 
 <footer>
-    <p>© 2026 Tienda Interstellar 🌌</p>
+    © 2026 Tienda Interstellar 🌌  
+    <br><br>
+
+    <!-- SECCIONES INFORMATIVAS ABAJO -->
+    <a href="sobre_nosotros.php">Quiénes somos</a>
+    <a href="contacto.php">Contacto</a>
+    <a href="politica_seguridad.php">Política de seguridad</a>
+
+    <br><br>
+
+    <!-- LOGIN ADMIN SEPARADO -->
+    <a href="admin_login.php">Acceso administradores</a>
 </footer>
 
 <!-- SCRIPT DEL FONDO DE ESTRELLAS -->

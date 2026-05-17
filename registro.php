@@ -13,26 +13,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $telefono = $_POST["telefono"];
     $fecha = date("Y-m-d");
 
-    // Comprobar si ya existe email
-    $check = $conn->query("SELECT * FROM Cliente WHERE email='$email'");
+    // Comprobar si ya existe email (versión segura)
+    $stmt = $conn->prepare("SELECT id_cliente FROM Cliente WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $check = $stmt->get_result();
 
     if ($check->num_rows > 0) {
         $error = "El email ya está registrado";
     } else {
 
-        $sql = "INSERT INTO Cliente 
-        (email, direccion, fecha_registro, telefono, nombre, apellidos, contrasena_hash)
-        VALUES 
-        ('$email','$direccion','$fecha','$telefono','$nombre','$apellidos','$password')";
+        // Insertar cliente (versión segura)
+        $stmt = $conn->prepare(
+            "INSERT INTO Cliente 
+            (email, direccion, fecha_registro, telefono, nombre, apellidos, contrasena_hash)
+            VALUES (?, ?, ?, ?, ?, ?, ?)"
+        );
 
-        $conn->query($sql);
+        $stmt->bind_param("sssssss", 
+            $email, $direccion, $fecha, $telefono, $nombre, $apellidos, $password
+        );
+
+        $stmt->execute();
 
         header("Location: login.php");
         exit();
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -141,6 +149,25 @@ button:hover {
     color: #ff4444;
     margin-top: 10px;
 }
+
+/* Footer */
+footer {
+    background: rgba(0,0,0,0.8);
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    border-top: 2px solid #00d4ff;
+}
+
+footer a {
+    color: #00d4ff;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+footer a:hover {
+    color: white;
+}
 </style>
 
 </head>
@@ -176,6 +203,19 @@ button:hover {
 <a href="index.php" class="volver">⬅ Volver al inicio</a>
 
 </div>
+
+<footer>
+    © 2026 Interstellar Shop 🌌  
+    <br><br>
+
+    <a href="sobre_nosotros.php">Quiénes somos</a>
+    <a href="contacto.php">Contacto</a>
+    <a href="politica_seguridad.php">Política de seguridad</a>
+
+    <br><br>
+
+    <a href="admin_login.php">Acceso administradores</a>
+</footer>
 
 <script>
 // Fondo animado

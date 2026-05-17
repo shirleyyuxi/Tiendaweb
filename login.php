@@ -18,7 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (password_verify($password, $usuario["contrasena_hash"])) {
 
+            // GUARDAR DATOS EN SESIÓN
             $_SESSION["cliente"] = $usuario["id_cliente"];
+            $_SESSION["nombre_cliente"] = $usuario["nombre"];
+            $_SESSION["apellidos_cliente"] = $usuario["apellidos"];
 
             header("Location: index.php");
             exit();
@@ -120,6 +123,25 @@ input {
     color: #ff4444;
     margin-top: 10px;
 }
+
+/* Footer */
+footer {
+    background: rgba(0,0,0,0.8);
+    text-align: center;
+    padding: 25px;
+    margin-top: 40px;
+    border-top: 2px solid #00d4ff;
+}
+
+footer a {
+    color: #00d4ff;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+footer a:hover {
+    color: white;
+}
 </style>
 </head>
 
@@ -143,6 +165,19 @@ input {
     <br>
     <a href="index.php" class="btn">⬅ Volver al inicio</a>
 </div>
+
+<footer>
+    © 2026 Interstellar Shop 🌌  
+    <br><br>
+
+    <a href="sobre_nosotros.php">Quiénes somos</a>
+    <a href="contacto.php">Contacto</a>
+    <a href="politica_seguridad.php">Política de seguridad</a>
+
+    <br><br>
+
+    <a href="admin_login.php">Acceso administradores</a>
+</footer>
 
 <script>
 // Fondo animado

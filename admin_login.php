@@ -2,30 +2,64 @@
 session_start();
 include("config.php");
 
-$sql = "SELECT * FROM Categoria ORDER BY id_categoria";
-$resultado = $conn->query($sql);
-?>
+$mensaje = "";
+$animacion = ""; // Para mostrar mensajes animados
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $email = $_POST["email"];
+    $pass = $_POST["password"];
+
+    // Consulta segura
+    $sql = "SELECT * FROM Administrador WHERE email = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+
+    if ($resultado->num_rows == 1) {
+        $admin = $resultado->fetch_assoc();
+
+        // Verificar contraseña
+        if (password_verify($pass, $admin["contrasena_hash"])) {
+
+            // Sesión correcta
+            $_SESSION["admin"] = $admin["id_admin"];
+            $_SESSION["admin_email"] = $admin["email"];
+
+            header("Location: admin/index.php");
+            exit();
+
+        } else {
+            $mensaje = "❌ Contraseña incorrecta";
+            $animacion = "shake";
+        }
+
+    } else {
+        $mensaje = "🚫 Administrador no encontrado";
+        $animacion = "shake";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Categorías</title>
+<title>Login Administrador</title>
 
 <style>
-/* Fondo general */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: black;
     color: white;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
-/* Canvas para estrellas */
+/* Fondo animado */
 #stars {
     position: fixed;
     top: 0;
@@ -55,56 +89,54 @@ header {
     border-bottom: 2px solid #00d4ff;
 }
 
-.logo {
-    font-size: 26px;
-    font-weight: bold;
-    color: #00d4ff;
-}
-
-nav a {
-    margin-left: 20px;
+header a {
     color: #00d4ff;
     text-decoration: none;
     font-weight: bold;
 }
 
-nav a:hover {
-    color: white;
-}
-
-/* Título */
-.titulo {
-    text-align: center;
-    margin: 40px 0 20px;
-    font-size: 2rem;
-}
-
-/* Grid de categorías */
-.categorias-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.categoria-card {
+/* Formulario */
+.contenedor {
+    margin: auto;
+    width: 350px;
     background: rgba(255,255,255,0.05);
-    border-radius: 15px;
-    padding: 25px;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
     text-align: center;
+    animation: <?php echo $animacion; ?> 0.3s;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #00d4ff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid rgba(255,255,255,0.1);
 }
 
-.categoria-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px rgba(0,212,255,0.4);
+button:hover {
+    background: white;
+    color: black;
 }
 
-.categoria-card h3 {
-    margin-bottom: 10px;
-    color: #00d4ff;
+/* Animación de error */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    50% { transform: translateX(8px); }
+    75% { transform: translateX(-8px); }
+    100% { transform: translateX(0); }
 }
 
 /* Footer */
@@ -112,7 +144,6 @@ footer {
     background: rgba(0,0,0,0.8);
     text-align: center;
     padding: 25px;
-    margin-top: auto;
     border-top: 2px solid #00d4ff;
 }
 
@@ -126,8 +157,8 @@ footer a:hover {
     color: white;
 }
 </style>
-
 </head>
+
 <body>
 
 <!-- Fondo animado -->
@@ -135,50 +166,33 @@ footer a:hover {
 <div id="overlay"></div>
 
 <header>
-    <div class="logo">🌌 Interstellar Shop</div>
-
-    <nav>
-        <a href="index.php">Inicio</a>
-        <a href="productos.php">Productos</a>
-        <a href="categorias.php">Categorías</a>
-        <a href="carrito.php">Carrito</a>
-
-        <?php if(isset($_SESSION["cliente"])) { ?>
-            <a href="mis_pedidos.php">Mis pedidos</a>
-            <a href="logout.php">Cerrar sesión</a>
-        <?php } else { ?>
-            <a href="login.php">Iniciar sesión</a>
-            <a href="registro.php">Registrarse</a>
-        <?php } ?>
-    </nav>
+    <a href="index.php">⬅ Volver al inicio</a>
 </header>
 
-<h2 class="titulo">✨ Explora por categorías</h2>
+<div class="contenedor">
+    <h2>Acceso Administrador</h2>
 
-<div class="categorias-grid">
-<?php while($cat = $resultado->fetch_assoc()) { ?>
-    <a href="categoria.php?id=<?php echo $cat['id_categoria']; ?>" style="text-decoration:none; color:white;">
-        <div class="categoria-card">
-            <h3><?php echo $cat['nombre']; ?></h3>
-            <p><?php echo $cat['descripcion']; ?></p>
-        </div>
-    </a>
-<?php } ?>
+    <form method="POST">
+        <input type="email" name="email" placeholder="Correo" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+
+        <button type="submit">Entrar</button>
+
+        <?php if ($mensaje != "") { ?>
+            <p style="color:#ff4444; margin-top:10px; font-weight:bold;">
+                <?php echo $mensaje; ?>
+            </p>
+        <?php } ?>
+    </form>
 </div>
 
 <footer>
-    © 2026 Tienda Interstellar 🌌  
+    © 2026 Interstellar Shop 🌌  
     <br><br>
 
-    <!-- SECCIONES INFORMATIVAS ABAJO -->
     <a href="sobre_nosotros.php">Quiénes somos</a>
     <a href="contacto.php">Contacto</a>
     <a href="politica_seguridad.php">Política de seguridad</a>
-
-    <br><br>
-
-    <!-- LOGIN ADMIN SEPARADO -->
-    <a href="admin_login.php">Acceso administradores</a>
 </footer>
 
 <!-- SCRIPT DEL FONDO DE ESTRELLAS -->

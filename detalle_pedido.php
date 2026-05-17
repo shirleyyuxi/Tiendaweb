@@ -39,7 +39,7 @@ $detalles = $conn->query($sqlDet);
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Detalle del pedido</title>
+<title>Pedido #<?php echo $id_pedido; ?></title>
 
 <style>
 body {
@@ -48,6 +48,9 @@ body {
     background: black;
     color: white;
     overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #stars, #overlay {
@@ -62,30 +65,48 @@ body {
     z-index: -1;
 }
 
+/* Header */
 header {
-    background: rgba(0,0,0,0.7);
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    background: rgba(0,0,0,0.85);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00d4ff;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #00d4ff;
 }
 
 nav a {
-    margin: 0 15px;
+    margin-left: 20px;
     color: #00d4ff;
     text-decoration: none;
     font-weight: bold;
 }
 
+nav a:hover {
+    color: white;
+}
+
+/* Contenedor */
 .contenedor {
     width: 80%;
     margin: 40px auto;
     background: rgba(255,255,255,0.05);
     padding: 25px;
     border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
+h2 {
+    color: #00d4ff;
+}
+
+/* Tabla */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -101,10 +122,23 @@ th {
     color: #00d4ff;
 }
 
+/* Footer */
 footer {
+    background: rgba(0,0,0,0.8);
     text-align: center;
-    padding: 20px;
-    margin-top: 40px;
+    padding: 25px;
+    margin-top: auto;
+    border-top: 2px solid #00d4ff;
+}
+
+footer a {
+    color: #00d4ff;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+footer a:hover {
+    color: white;
 }
 </style>
 
@@ -115,7 +149,8 @@ footer {
 <div id="overlay"></div>
 
 <header>
-    <h1>📦 Detalle del pedido #<?php echo $id_pedido; ?></h1>
+    <div class="logo">🌌 Interstellar Shop</div>
+
     <nav>
         <a href="index.php">Inicio</a>
         <a href="mis_pedidos.php">Mis pedidos</a>
@@ -127,14 +162,14 @@ footer {
 
 <div class="contenedor">
 
-    <h2>Información del pedido</h2>
+    <h2>📦 Detalle del pedido #<?php echo $id_pedido; ?></h2>
 
     <p><strong>Estado:</strong> <?php echo $pedido["estado"]; ?></p>
     <p><strong>Total:</strong> <?php echo number_format($pedido["total"], 2); ?> €</p>
     <p><strong>Puntos usados:</strong> <?php echo $pedido["puntos_usados"]; ?></p>
     <p><strong>Fecha estimada de entrega:</strong> <?php echo $pedido["fecha_estimada_entrega"]; ?></p>
 
-    <h2>Artículos</h2>
+    <h2>Artículos incluidos</h2>
 
     <table>
         <tr>
@@ -157,7 +192,16 @@ footer {
 </div>
 
 <footer>
-    © 2026 Tienda Interstellar 🌌
+    © 2026 Tienda Interstellar 🌌  
+    <br><br>
+
+    <a href="sobre_nosotros.php">Quiénes somos</a>
+    <a href="contacto.php">Contacto</a>
+    <a href="politica_seguridad.php">Política de seguridad</a>
+
+    <br><br>
+
+    <a href="admin_login.php">Acceso administradores</a>
 </footer>
 
 <script>

@@ -44,10 +44,8 @@ body {
     width: 100%;
     height: 100%;
     z-index: -2;
-    background: black;
 }
 
-/* Capa de degradado suave */
 #overlay {
     position: fixed;
     top: 0;
@@ -60,25 +58,29 @@ body {
 
 /* Header */
 header {
-    background: rgba(0,0,0,0.7);
-    padding: 20px;
-    text-align: center;
-    backdrop-filter: blur(5px);
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    background: rgba(0,0,0,0.85);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00d4ff;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #00d4ff;
 }
 
 nav a {
-    margin: 0 15px;
+    margin-left: 20px;
     color: #00d4ff;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
 }
 
 nav a:hover {
-    color: #00ffea;
+    color: white;
 }
 
 /* Carrito */
@@ -132,9 +134,19 @@ button:disabled {
 footer {
     background: rgba(0,0,0,0.8);
     text-align: center;
-    padding: 15px;
+    padding: 25px;
     margin-top: auto;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 2px solid #00d4ff;
+}
+
+footer a {
+    color: #00d4ff;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+footer a:hover {
+    color: white;
 }
 </style>
 
@@ -146,7 +158,8 @@ footer {
 <div id="overlay"></div>
 
 <header>
-    <h1>🛒 Tu carrito</h1>
+    <div class="logo">🌌 Interstellar Shop</div>
+
     <nav>
         <a href="index.php">Inicio</a>
         <a href="productos.php">Productos</a>
@@ -154,10 +167,11 @@ footer {
         <a href="carrito.php">Carrito</a>
 
         <?php if(isset($_SESSION["cliente"])) { ?>
+            <a href="mis_pedidos.php">Mis pedidos</a>
             <a href="logout.php">Cerrar sesión</a>
         <?php } else { ?>
-            <a href="login.php">Login</a>
-            <a href="registro.php">Registro</a>
+            <a href="login.php">Iniciar sesión</a>
+            <a href="registro.php">Registrarse</a>
         <?php } ?>
     </nav>
 </header>
@@ -237,7 +251,18 @@ if (count($_SESSION['carrito']) > 0) {
 </div>
 
 <footer>
-    <p>© 2026 Tienda Interstellar 🌌</p>
+    © 2026 Tienda Interstellar 🌌  
+    <br><br>
+
+    <!-- SECCIONES INFORMATIVAS ABAJO -->
+    <a href="sobre_nosotros.php">Quiénes somos</a>
+    <a href="contacto.php">Contacto</a>
+    <a href="politica_seguridad.php">Política de seguridad</a>
+
+    <br><br>
+
+    <!-- LOGIN ADMIN SEPARADO -->
+    <a href="admin_login.php">Acceso administradores</a>
 </footer>
 
 <!-- SCRIPT DEL FONDO DE ESTRELLAS -->
@@ -301,4 +326,3 @@ window.onresize = () => {
 
 </body>
 </html>
-

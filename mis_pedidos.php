@@ -27,8 +27,12 @@ body {
     font-family: Arial;
     background: black;
     color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Fondo estrellas */
 #stars, #overlay {
     position: fixed;
     top: 0; left: 0;
@@ -41,27 +45,44 @@ body {
     z-index: -1;
 }
 
+/* Header */
 header {
-    background: rgba(0,0,0,0.7);
-    padding: 20px;
-    text-align: center;
+    background: rgba(0,0,0,0.85);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #00d4ff;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    color: #00d4ff;
 }
 
 nav a {
-    margin: 0 15px;
+    margin-left: 20px;
     color: #00d4ff;
     text-decoration: none;
     font-weight: bold;
 }
 
+nav a:hover {
+    color: white;
+}
+
+/* Contenedor */
 .contenedor {
     width: 80%;
     margin: 40px auto;
     background: rgba(255,255,255,0.05);
     padding: 25px;
     border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
+/* Tabla */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -79,6 +100,30 @@ th {
 a.btn {
     color: #00d4ff;
     font-weight: bold;
+    text-decoration: none;
+}
+
+a.btn:hover {
+    color: white;
+}
+
+/* Footer */
+footer {
+    background: rgba(0,0,0,0.8);
+    text-align: center;
+    padding: 25px;
+    margin-top: auto;
+    border-top: 2px solid #00d4ff;
+}
+
+footer a {
+    color: #00d4ff;
+    text-decoration: none;
+    margin: 0 12px;
+}
+
+footer a:hover {
+    color: white;
 }
 </style>
 
@@ -89,16 +134,21 @@ a.btn {
 <div id="overlay"></div>
 
 <header>
-    <h1>📜 Mis pedidos</h1>
+    <div class="logo">🌌 Interstellar Shop</div>
+
     <nav>
         <a href="index.php">Inicio</a>
         <a href="productos.php">Productos</a>
+        <a href="categorias.php">Categorías</a>
         <a href="carrito.php">Carrito</a>
+        <a href="mis_pedidos.php">Mis pedidos</a>
         <a href="logout.php">Cerrar sesión</a>
     </nav>
 </header>
 
 <div class="contenedor">
+
+<h2 style="color:#00d4ff;">📜 Historial de pedidos</h2>
 
 <table>
     <tr>
@@ -122,6 +172,19 @@ a.btn {
 </table>
 
 </div>
+
+<footer>
+    © 2026 Interstellar Shop 🌌  
+    <br><br>
+
+    <a href="sobre_nosotros.php">Quiénes somos</a>
+    <a href="contacto.php">Contacto</a>
+    <a href="politica_seguridad.php">Política de seguridad</a>
+
+    <br><br>
+
+    <a href="admin_login.php">Acceso administradores</a>
+</footer>
 
 <script>
 // Fondo animado

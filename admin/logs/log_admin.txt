@@ -1,0 +1,19 @@
+[2026-05-12 12:37:03] admin: admin@tienda.com | ACCIÓN: EXPORTAR_PRODUCTOS | Detalles: Exportó todos los productos.
+[2026-05-12 12:41:56] admin: admin@tienda.com | ACCIÓN: EXPORTAR_PRODUCTOS | Detalles: Exportó todos los productos.
+[2026-05-12 12:46:22] admin: admin@tienda.com | ACCIÓN: EXPORTAR_PRODUCTOS | Detalles: Exportó todos los productos.
+[2026-05-12 12:46:43] admin: admin@tienda.com | ACCIÓN: EXPORTAR_PRODUCTOS | Detalles: Exportó todos los productos.
+[2026-05-12 12:50:38] admin: admin@tienda.com | ACCIÓN: IMPORTAR_PRODUCTOS | Detalles: Creados: 0 | Actualizados: 21
+[2026-05-12 12:52:38] admin: prueba@correo.com | ACCIÓN: TEST | Detalles: Probando el sistema de logs
+[2026-05-13 00:35:44] admin: prueba@correo.com | ACCIÓN: EXPORTAR_CATEGORIAS | Detalles: Exportó todas las categorías.
+[2026-05-13 00:35:52] admin: prueba@correo.com | ACCIÓN: EXPORTAR_CLIENTES | Detalles: Exportó todos los clientes.
+[2026-05-13 00:35:57] admin: prueba@correo.com | ACCIÓN: EXPORTAR_PEDIDOS | Detalles: Exportó todos los pedidos.
+[2026-05-13 00:41:24] admin: prueba@correo.com | ACCIÓN: EXPORTAR_PRODUCTOS | Detalles: Exportó todos los productos.
+[2026-05-13 00:41:28] admin: prueba@correo.com | ACCIÓN: EXPORTAR_CATEGORIAS | Detalles: Exportó todas las categorías.
+[2026-05-13 00:41:33] admin: prueba@correo.com | ACCIÓN: EXPORTAR_CLIENTES | Detalles: Exportó todos los clientes.
+[2026-05-13 00:42:53] admin: prueba@correo.com | ACCIÓN: EXPORTAR_PRODUCTOS | Detalles: Exportó todos los productos.
+[2026-05-13 00:42:59] admin: prueba@correo.com | ACCIÓN: EXPORTAR_CATEGORIAS | Detalles: Exportó todas las categorías.
+[2026-05-13 00:48:33] admin: prueba@correo.com | ACCIÓN: EXPORTAR_PRODUCTOS | Detalles: Exportó todos los productos.
+[2026-05-13 00:48:37] admin: prueba@correo.com | ACCIÓN: EXPORTAR_CATEGORIAS | Detalles: Exportó todas las categorías.
+[2026-05-13 00:51:40] admin: prueba@correo.com | ACCIÓN: IMPORTAR_STOCK | Detalles: Actualizó existencias mediante CSV.
+[2026-05-13 00:58:34] admin: prueba@correo.com | ACCIÓN: IMPORTAR_STOCK | Detalles: Actualizó existencias mediante CSV.
+[2026-05-13 01:02:40] admin: prueba@correo.com | ACCIÓN: IMPORTAR_STOCK | Detalles: Actualizó existencias mediante CSV.

@@ -4,7 +4,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Política de Seguridad</title>
+<title>Error 404 - Página no encontrada</title>
 
 <style>
 body {
@@ -49,19 +49,35 @@ nav a:hover {
     max-width: 900px;
     margin: auto;
     padding: 40px 20px;
-}
-
-h2 {
-    font-size: 2.5rem;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-p, li {
-    font-size: 1.1rem;
-    line-height: 1.7;
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px #00d4ff;
+}
+
+p {
+    font-size: 1.3rem;
     opacity: 0.9;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.volver {
+    display: inline-block;
+    padding: 12px 25px;
+    background: #00d4ff;
+    color: black;
+    border-radius: 10px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.volver:hover {
+    background: #00ffff;
+    transform: scale(1.05);
 }
 
 /* Footer */
@@ -107,36 +123,9 @@ footer a:hover {
 </header>
 
 <div class="contenido">
-    <h2>🔐 Política de Seguridad</h2>
-
-    <p>
-        En <strong>Tienda Interstellar</strong> nos tomamos muy en serio la seguridad de tus datos.
-        Toda la información proporcionada por nuestros clientes se almacena de forma segura y se utiliza
-        exclusivamente para la gestión de pedidos y la mejora del servicio.
-    </p>
-
-    <p>
-        Los datos personales no se comparten con terceros, salvo en los casos estrictamente necesarios
-        para completar un pedido (por ejemplo, servicios de envío).
-    </p>
-
-    <p>
-        Las contraseñas se almacenan mediante cifrado seguro (<strong>hash</strong>), lo que garantiza que
-        nadie pueda acceder a ellas, ni siquiera nuestro equipo.
-    </p>
-
-    <p>Implementamos medidas de seguridad como:</p>
-
-    <ul>
-        <li>Cifrado de contraseñas</li>
-        <li>Control de acceso por roles</li>
-        <li>Protección contra inyecciones SQL</li>
-        <li>Validación de datos en formularios</li>
-    </ul>
-
-    <p>
-        Si tienes dudas sobre cómo protegemos tu información, puedes escribirnos desde la página de contacto.
-    </p>
+    <h1>🚫 Error 404</h1>
+    <p>La página que buscas se ha perdido en el espacio profundo.</p>
+    <a href="index.php" class="volver">⬅ Volver al inicio</a>
 </div>
 
 <footer>
